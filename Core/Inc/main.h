@@ -76,6 +76,7 @@ typedef union {
 	struct{
 	/* ================ MISSATGE 1 ================ */
 	uint8_t TfDIGspre;
+	uint16_t TfSHU;
 
 	};
 } DICCF_t;
