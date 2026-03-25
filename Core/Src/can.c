@@ -2,8 +2,16 @@
 
 void CAN_Msg_Maker(DICCP_t *DICCP, uint8_t *Msg)
 {
-	/* ================ MISSATGE 1 ================ */
+	Msg[0] |= ((DICCP->SpERRbms    & 0x01) << 0);
+	Msg[0] |= ((DICCP->SpERRimd    & 0x01) << 1);
+	Msg[0] |= ((DICCP->SpLCHebms   & 0x01) << 2);
+	Msg[0] |= ((DICCP->SpLCHeimd   & 0x01) << 3);
+	Msg[0] |= ((DICCP->SpINTresbut & 0x01) << 4);
+	Msg[0] |= ((DICCP->SpSDCbms    & 0x01) << 5);
+	Msg[0] |= ((DICCP->SpSDCimd    & 0x01) << 5);
 
+	Msg[1] |= ((DICCP->SpSHU     & 0x00FF) << 0);
+	Msg[2] |= ((DICCP->SpSHU     & 0xFF00) >> 8);
 }
 
 HAL_StatusTypeDef CAN_Send(FDCAN_HandleTypeDef *hfdcan, uint32_t id, uint8_t *data, uint32_t len) {

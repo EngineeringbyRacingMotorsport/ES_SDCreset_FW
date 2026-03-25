@@ -67,24 +67,38 @@ void Error_Handler(void);
 #define SfLCHebms_GPIO_Port GPIOA
 #define SfLCHeimd_Pin GPIO_PIN_3
 #define SfLCHeimd_GPIO_Port GPIOA
-#define SfSHU_Pin GPIO_PIN_6
-#define SfSHU_GPIO_Port GPIOA
+#define SfSDCbms_Pin GPIO_PIN_5
+#define SfSDCbms_GPIO_Port GPIOA
+#define SfSDCimd_Pin GPIO_PIN_6
+#define SfSDCimd_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 typedef union {
 	uint8_t array[12];
 	struct{
 	/* ================ MISSATGE 1 ================ */
-	uint8_t TfDIGspre;
-	uint16_t TfSHU;
-
+	uint8_t SfERRbms;
+	uint8_t SfERRimd;
+	uint8_t SfLCHebms;
+	uint8_t SfLCHeimd;
+	uint8_t SfINTresbut;
+	uint8_t SfSDCbms;
+	uint8_t SfSDCimd;
+	uint16_t SfSHU;
 	};
 } DICCF_t;
 
 typedef struct {
-	uint8_t TpDIGspre;
-
+	uint8_t SpERRbms;
+	uint8_t SpERRimd;
+	uint8_t SpLCHebms;
+	uint8_t SpLCHeimd;
+	uint8_t SpINTresbut;
+	uint8_t SpSDCbms;
+	uint8_t SpSDCimd;
+	uint16_t SpSHU;
 }DICCP_t;
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

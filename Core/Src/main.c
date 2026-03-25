@@ -76,7 +76,7 @@ int main(void)
 	DICCF_t DICCF = {0};
 	DICCP_t DICCP = {0};
 	uint8_t Msg[3] = {0};
-	uint16_t adc1_buff[1];
+	uint32_t adc1_buff[1] = {0};
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -95,6 +95,14 @@ int main(void)
   HAL_ADCEx_Calibration_Start(&hadc1);
 
   HAL_ADC_Start_DMA(&hadc1, adc1_buff, 1);
+
+  DIG2DICCF(&DICCF);
+
+  DICCF2DICCP(&DICCF, &DICCP);
+
+  CAN_Msg_Maker(&DICCP, Msg);
+
+  CAN_Send(&hfdcan1, 0x100, Msg, 3);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -111,7 +119,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	DMA2DICCF(&DICCF,&adc1_buff);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -295,9 +303,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : SfINTresbut_Pin SfLCHebms_Pin SfLCHeimd_Pin PA4
-                           PA5 */
+                           SfSDCbms_Pin */
   GPIO_InitStruct.Pin = SfINTresbut_Pin|SfLCHebms_Pin|SfLCHeimd_Pin|GPIO_PIN_4
-                          |GPIO_PIN_5;
+                          |SfSDCbms_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
