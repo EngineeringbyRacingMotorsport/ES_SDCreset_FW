@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define SfSUPled_Pin GPIO_PIN_7
+#define SfSUPled_GPIO_Port GPIOB
 #define SfERRbms_Pin GPIO_PIN_14
 #define SfERRbms_GPIO_Port GPIOC
 #define SfERRimd_Pin GPIO_PIN_15
@@ -67,10 +69,12 @@ void Error_Handler(void);
 #define SfLCHebms_GPIO_Port GPIOA
 #define SfLCHeimd_Pin GPIO_PIN_3
 #define SfLCHeimd_GPIO_Port GPIOA
-#define SfSDCbms_Pin GPIO_PIN_5
-#define SfSDCbms_GPIO_Port GPIOA
-#define SfSDCimd_Pin GPIO_PIN_6
+#define SfSDCimd_Pin GPIO_PIN_4
 #define SfSDCimd_GPIO_Port GPIOA
+#define SfSHU_Pin GPIO_PIN_5
+#define SfSHU_GPIO_Port GPIOA
+#define SfSDCbms_Pin GPIO_PIN_6
+#define SfSDCbms_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 typedef union {

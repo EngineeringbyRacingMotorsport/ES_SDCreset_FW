@@ -8,7 +8,7 @@ void CAN_Msg_Maker(DICCP_t *DICCP, uint8_t *Msg)
 	Msg[0] |= ((DICCP->SpLCHeimd   & 0x01) << 3);
 	Msg[0] |= ((DICCP->SpINTresbut & 0x01) << 4);
 	Msg[0] |= ((DICCP->SpSDCbms    & 0x01) << 5);
-	Msg[0] |= ((DICCP->SpSDCimd    & 0x01) << 5);
+	Msg[0] |= ((DICCP->SpSDCimd    & 0x01) << 6);
 
 	Msg[1] |= ((DICCP->SpSHU     & 0x00FF) << 0);
 	Msg[2] |= ((DICCP->SpSHU     & 0xFF00) >> 8);
@@ -25,6 +25,8 @@ HAL_StatusTypeDef CAN_Send(FDCAN_HandleTypeDef *hfdcan, uint32_t id, uint8_t *da
     txHeader.FDFormat = FDCAN_CLASSIC_CAN;
     txHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
     txHeader.MessageMarker = 0;
+
+    HAL_GPIO_WritePin(GPIOB, SfSUPled_Pin, GPIO_PIN_SET);
 
     return HAL_FDCAN_AddMessageToTxFifoQ(hfdcan, &txHeader, data);
 }
