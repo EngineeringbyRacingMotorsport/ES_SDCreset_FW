@@ -22,4 +22,5 @@ void DICCF2DICCP(DICCF_t *DICCF, DICCP_t *DICCP) {
 	DICCP->SpINTresbut   = DICCF->SfINTresbut;
 	DICCP->SpSDCbms      = DICCF->SfSDCbms;
 	DICCP->SpSDCimd      = DICCF->SfSDCimd;
+	DICCP->SpSHU		 = DICCF->SfSHU;
 };

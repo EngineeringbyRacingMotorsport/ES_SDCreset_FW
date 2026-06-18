@@ -143,7 +143,7 @@ void SysTick_Handler(void)
 /**
   * @brief This function handles DMAMUX and DMA1 channel 4 to channel 7 interrupts.
   */
-void DMAMUX1_DMA1_CH4_5_6_7_IRQHandler(void)
+void DMAMUX1_DMA1_CH4_5_IRQHandler(void)
 {
   /* USER CODE BEGIN DMAMUX1_DMA1_CH4_5_6_7_IRQn 0 */
 
@@ -155,5 +155,9 @@ void DMAMUX1_DMA1_CH4_5_6_7_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
+void ADC1_COMP_IRQHandler(void)
+{
+  extern ADC_HandleTypeDef hadc1;
+  HAL_ADC_IRQHandler(&hadc1);
+}
 /* USER CODE END 1 */
