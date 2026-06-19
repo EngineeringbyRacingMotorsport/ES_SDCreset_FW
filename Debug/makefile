@@ -60,8 +60,8 @@ all: main-build
 main-build: SDCreset.elf secondary-outputs
 
 # Tool invocations
-SDCreset.elf SDCreset.map: $(OBJS) $(USER_OBJS) C:\EUSSMS_GIT\Firmware\ES_SDCreset_FW\STM32C092FCPX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "SDCreset.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\EUSSMS_GIT\Firmware\ES_SDCreset_FW\STM32C092FCPX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SDCreset.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+SDCreset.elf SDCreset.map: $(OBJS) $(USER_OBJS) C:\Users\oriol\git\SDCReset\STM32C092FCPX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "SDCreset.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\oriol\git\SDCReset\STM32C092FCPX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SDCreset.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

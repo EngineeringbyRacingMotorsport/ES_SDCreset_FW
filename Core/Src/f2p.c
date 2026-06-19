@@ -15,12 +15,12 @@ void DIG2DICCF(DICCF_t *DICCF){
 };
 
 void DICCF2DICCP(DICCF_t *DICCF, DICCP_t *DICCP) {
-	DICCP->SpERRbms      = DICCF->SfERRbms ;
-	DICCP->SpERRimd      = DICCF->SfERRimd ;
-	DICCP->SpLCHebms     = DICCF->SfLCHebms;
-	DICCP->SpLCHeimd     = DICCF->SfLCHeimd;
+	DICCP->SpERRbms      = !DICCF->SfERRbms;
+	DICCP->SpERRimd      = !DICCF->SfERRimd ;
+	DICCP->SpLCHebms     = !DICCF->SfLCHebms;
+	DICCP->SpLCHeimd     = !DICCF->SfLCHeimd;
 	DICCP->SpINTresbut   = DICCF->SfINTresbut;
-	DICCP->SpSDCbms      = DICCF->SfSDCbms;
-	DICCP->SpSDCimd      = DICCF->SfSDCimd;
-	DICCP->SpSHU		 = DICCF->SfSHU;
+	DICCP->SpSDCbms      = !DICCF->SfSDCbms;
+	DICCP->SpSDCimd      = !DICCF->SfSDCimd ;
+	DICCP->SpSHU		 = ((DICCF->SfSHU*3.3)/4095)/(0.130*100) ;
 };
