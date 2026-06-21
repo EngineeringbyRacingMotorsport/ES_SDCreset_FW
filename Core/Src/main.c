@@ -105,10 +105,7 @@ int main(void)
   DICCF_t DICCF = {0};
   DICCP_t DICCP = {0};
   CAN_Init_Custom(&hfdcan1);
-  //HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
-  //HAL_ADCEx_Calibration_Start(&hadc1);
-
-  //HAL_ADC_Start_DMA(&hadc1, adc1_buff, 1);
+  HAL_ADCEx_Calibration_Start(&hadc1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
