@@ -342,12 +342,16 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SfINTresbut_Pin SfLCHebms_Pin SfLCHeimd_Pin SfSDCimd_Pin
-                           SfSDCbms_Pin */
-  GPIO_InitStruct.Pin = SfINTresbut_Pin|SfLCHebms_Pin|SfLCHeimd_Pin|SfSDCimd_Pin
-                          |SfSDCbms_Pin;
+  /*Configure GPIO pins : SfINTresbut_Pin SfLCHebms_Pin SfLCHeimd_Pin */
+  GPIO_InitStruct.Pin = SfINTresbut_Pin|SfLCHebms_Pin|SfLCHeimd_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SfSDCimd_Pin SfSDCbms_Pin */
+  GPIO_InitStruct.Pin = SfSDCimd_Pin|SfSDCbms_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
