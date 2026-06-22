@@ -77,10 +77,7 @@ void Error_Handler(void);
 #define SfSDCbms_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
-typedef union {
-	uint8_t array[12];
-	struct{
-	/* ================ MISSATGE 1 ================ */
+typedef struct {
 	uint8_t SfERRbms;
 	uint8_t SfERRimd;
 	uint8_t SfLCHebms;
@@ -89,7 +86,6 @@ typedef union {
 	uint8_t SfSDCbms;
 	uint8_t SfSDCimd;
 	uint16_t SfSHU;
-	};
 } DICCF_t;
 
 typedef struct {

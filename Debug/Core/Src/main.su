@@ -5,4 +5,4 @@
 ../Core/Src/main.c:258:13:MX_FDCAN1_Init	8	static
 ../Core/Src/main.c:299:13:MX_DMA_Init	16	static
 ../Core/Src/main.c:317:13:MX_GPIO_Init	48	static
-../Core/Src/main.c:366:6:Error_Handler	8	static,ignoring_inline_asm
+../Core/Src/main.c:370:6:Error_Handler	8	static,ignoring_inline_asm
