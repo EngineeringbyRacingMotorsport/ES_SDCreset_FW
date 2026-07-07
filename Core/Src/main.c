@@ -51,6 +51,7 @@ FDCAN_HandleTypeDef hfdcan1;
 /* USER CODE BEGIN PV */
 #define DMA_CH1 1
 uint32_t DICCDMA[DMA_CH1];
+
 DICCF_t DICCF = {0};
 DICCP_t DICCP = {0};
 /* USER CODE END PV */
