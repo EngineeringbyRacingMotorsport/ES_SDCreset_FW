@@ -43,12 +43,16 @@
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
+uint8_t LastCANSendTime = 0;
+uint8_t numberOfCANMessagesSent = 0;
 
 FDCAN_HandleTypeDef hfdcan1;
 
 /* USER CODE BEGIN PV */
 #define DMA_CH1 1
 uint32_t DICCDMA[DMA_CH1];
+DICCF_t DICCF = {0};
+DICCP_t DICCP = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -102,8 +106,6 @@ int main(void)
   MX_FDCAN1_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
-  DICCF_t DICCF = {0};
-  DICCP_t DICCP = {0};
   CAN_Init_Custom(&hfdcan1);
   HAL_ADCEx_Calibration_Start(&hadc1);
   /* USER CODE END 2 */
@@ -129,9 +131,22 @@ int main(void)
 
 	  CAN_Msg_Maker(&DICCP, Msg);
 
-	  CAN_Send(&hfdcan1, 0x600, Msg, 3);
+	  if (HAL_GetTick() - LastCANSendTime >= 10)
+	  {
+		  CAN_Send(&hfdcan1, 0x600, Msg, 3);
+		  LastCANSendTime = HAL_GetTick();
+		  numberOfCANMessagesSent++;
+	  }
 
-	  HAL_Delay(10);
+	  if(numberOfCANMessagesSent >= 8 && numberOfCANMessagesSent <= 10)
+	  {
+		  HAL_GPIO_WritePin(SfSUPled_GPIO_Port, SfSUPled_Pin, GPIO_PIN_SET);
+		  if(numberOfCANMessagesSent == 10)
+		  {
+			  numberOfCANMessagesSent = 0;
+			  HAL_GPIO_WritePin(SfSUPled_GPIO_Port, SfSUPled_Pin, GPIO_PIN_RESET);
+		  }
+	  }
   }
   /* USER CODE END 3 */
 }
