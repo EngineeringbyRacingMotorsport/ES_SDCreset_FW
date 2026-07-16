@@ -43,14 +43,14 @@
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
-uint8_t LastCANSendTime = 0;
-uint8_t numberOfCANMessagesSent = 0;
 
 FDCAN_HandleTypeDef hfdcan1;
 
 /* USER CODE BEGIN PV */
 #define DMA_CH1 1
 uint32_t DICCDMA[DMA_CH1];
+uint8_t LastCANSendTime = 0;
+uint16_t numberOfCANMessagesSent = 0;
 
 DICCF_t DICCF = {0};
 DICCP_t DICCP = {0};
@@ -122,8 +122,6 @@ int main(void)
 
 	  uint8_t Msg[3] = {0};
 
-	  HAL_GPIO_WritePin(GPIOB, SfSUPled_Pin, GPIO_PIN_RESET);
-
 	  DIG2DICCF(&DICCF);
 
 	  DMA2DICCF(&DICCF, DICCDMA);
@@ -135,17 +133,15 @@ int main(void)
 	  if (HAL_GetTick() - LastCANSendTime >= 10)
 	  {
 		  CAN_Send(&hfdcan1, 0x600, Msg, 3);
-		  LastCANSendTime = HAL_GetTick();
-		  numberOfCANMessagesSent++;
-	  }
 
-	  if(numberOfCANMessagesSent >= 8 && numberOfCANMessagesSent <= 10)
-	  {
-		  HAL_GPIO_WritePin(SfSUPled_GPIO_Port, SfSUPled_Pin, GPIO_PIN_SET);
-		  if(numberOfCANMessagesSent == 10)
+		  LastCANSendTime = HAL_GetTick();
+
+		  numberOfCANMessagesSent++;
+
+		  if(numberOfCANMessagesSent > 2000)
 		  {
+			  HAL_GPIO_TogglePin(GPIOB, SfSUPled_Pin);
 			  numberOfCANMessagesSent = 0;
-			  HAL_GPIO_WritePin(SfSUPled_GPIO_Port, SfSUPled_Pin, GPIO_PIN_RESET);
 		  }
 	  }
   }
@@ -318,11 +314,6 @@ static void MX_DMA_Init(void)
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
 
-  /* DMA interrupt init */
-  /* DMAMUX1_DMA1_CH4_5_6_7_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMAMUX1_DMA1_CH4_5_6_7_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMAMUX1_DMA1_CH4_5_6_7_IRQn);
-
 }
 
 /**
@@ -390,6 +381,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	  HAL_GPIO_WritePin(GPIOB, SfSUPled_Pin, GPIO_PIN_RESET);
   }
   /* USER CODE END Error_Handler_Debug */
 }

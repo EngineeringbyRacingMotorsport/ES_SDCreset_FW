@@ -55,7 +55,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_adc1;
+
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -139,20 +139,6 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32c0xx.s).                    */
 /******************************************************************************/
-
-/**
-  * @brief This function handles DMAMUX and DMA1 channel 4 to channel 7 interrupts.
-  */
-void DMAMUX1_DMA1_CH4_5_6_7_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMAMUX1_DMA1_CH4_5_6_7_IRQn 0 */
-
-  /* USER CODE END DMAMUX1_DMA1_CH4_5_6_7_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_adc1);
-  /* USER CODE BEGIN DMAMUX1_DMA1_CH4_5_6_7_IRQn 1 */
-
-  /* USER CODE END DMAMUX1_DMA1_CH4_5_6_7_IRQn 1 */
-}
 
 /* USER CODE BEGIN 1 */
 void ADC1_COMP_IRQHandler(void)
