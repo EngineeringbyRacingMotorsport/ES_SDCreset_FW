@@ -3894,7 +3894,7 @@ int main(void)
  8001e46:	0018      	movs	r0, r3
  8001e48:	f7ff fdf8 	bl	8001a3c <CAN_Msg_Maker>
 
-	  if (HAL_GetTick() - LastCANSendTime >= 10)
+	  if ((HAL_GetTick() - LastCANSendTime) >= 10)
  8001e4c:	f000 fbcc 	bl	80025e8 <HAL_GetTick>
  8001e50:	0002      	movs	r2, r0
  8001e52:	4b18      	ldr	r3, [pc, #96]	@ (8001eb4 <main+0xe0>)

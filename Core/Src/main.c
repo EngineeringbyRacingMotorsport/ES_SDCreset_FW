@@ -49,7 +49,7 @@ FDCAN_HandleTypeDef hfdcan1;
 /* USER CODE BEGIN PV */
 #define DMA_CH1 1
 uint32_t DICCDMA[DMA_CH1];
-uint8_t LastCANSendTime = 0;
+uint32_t LastCANSendTime = 0;
 uint16_t numberOfCANMessagesSent = 0;
 
 DICCF_t DICCF = {0};
@@ -130,7 +130,7 @@ int main(void)
 
 	  CAN_Msg_Maker(&DICCP, Msg);
 
-	  if (HAL_GetTick() - LastCANSendTime >= 10)
+	  if ((HAL_GetTick() - LastCANSendTime) >= 10)
 	  {
 		  CAN_Send(&hfdcan1, 0x600, Msg, 3);
 
